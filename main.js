@@ -15,13 +15,17 @@ async function render(tray) {
                 {
                     label: 'Abrir com o VSCode',
                     type: 'normal',
-                    click: () => spawn('code', [e.path], { shell: true })
+                    click: () => {
+                        spawn('code', [e.path], { shell: true });
+                        new Notification({ title: 'PROJETO ABERTO', body: `O PROJETO ${e.name} ESTÁ SENDO ABERTO!`, icon: resolve(__dirname, 'assets', 'notification.png') }).show()
+                    }
                 },
                 {
                     label: 'Remover projeto',
                     type: 'normal',
                     click: () => {
                         data.removeData(e.path);
+                        new Notification({ title: 'PROJETO REMOVIDO', body: `O PROJETO ${e.name} FOI DELETADO!`, icon: resolve(__dirname, 'assets', 'notification.png') }).show()
                         setTimeout(() => { render(tray); }, 100);
                     }
                 }
@@ -35,10 +39,10 @@ async function render(tray) {
             type: 'normal',
             click: async () => {
                 const result = dialog.showOpenDialogSync({ properties: ['openDirectory'] });
-                if(!result) return;
+                if (!result) return;
                 const [path] = result;
                 data.saveData(path, basename(path));
-                new Notification({ title: 'Projeto Adicionado', body: `Nome do projeto: ${basename(path)}`, icon: resolve(__dirname, 'assets', 'notification.png') }).show()
+                new Notification({ title: 'PROJETO ADICIONADO', body: `O PROJETO ${basename(path)} FOI ADICIONADO!`, icon: resolve(__dirname, 'assets', 'notification.png') }).show()
                 setTimeout(() => { render(tray); }, 100);
             }
         },
