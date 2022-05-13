@@ -4,7 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package-linux": "electron-packager . vscode-tray --plataform=linux --arch=x64"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +13,7 @@
   "dependencies": {
     "child_process": "^1.0.2",
     "electron": "^18.2.0",
+    "electron-packager": "^15.5.1",
     "jsonfile-promised": "^0.0.1"
   }
 }

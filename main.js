@@ -49,7 +49,17 @@ async function render(tray) {
         {
             type: 'separator'
         },
-        ...projects
+        ...projects,
+        {
+            type: 'separator'
+        },
+        {
+            label: 'Quit',
+            type: 'normal',
+            click: async () => {
+                app.quit();
+            }
+        }
     ]);
 
     tray.setContextMenu(contextMenu)
